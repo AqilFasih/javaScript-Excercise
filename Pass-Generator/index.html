@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Password Generator</title>
+
+       
+</head>
+<body>
+    <div class="container">
+        <h2>Password Generator</h2>
+        <label for="password">Generated Password:</label>
+        <input type="text" id="password" readonly>
+        <br>
+        <label for="length">Password Length:</label>
+        <input type="number" id="length" min="6" max="12" value="0">
+        <br>
+        <label>
+            <input type="checkbox" id="includeSymbols" checked> Include Symbols
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" id="includeNumbers" checked> Include Numbers
+        </label>
+        <br>
+        <button onclick="generatePassword()">Generate Password</button>
+    </div>
+
+    <script>
+        function generatePassword() {
+            let length = document.getElementById("length").value;
+            let includeSymbols = document.getElementById("includeSymbols").checked;
+            let includeNumbers = document.getElementById("includeNumbers").checked;
+            
+            let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (includeNumbers) charset += "0123456789";
+            if (includeSymbols) charset += "!@#$%^&*()";
+            
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                let randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            document.getElementById("password").value = password;
+        }
+    </script>
+</body>
+</html>
